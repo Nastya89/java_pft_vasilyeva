@@ -60,6 +60,38 @@ public class TestBase {
         driver.findElement(By.linkText("GROUPS")).click();
     }
 
+    protected void submitContactCreation() {
+        driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='NOTES:'])[1]/following::input[1]")).click();
+    }
+
+    protected void fillContactForm(ContactData contactData) {
+        driver.findElement(By.name("firstname")).click();
+        driver.findElement(By.name("firstname")).clear();
+        driver.findElement(By.name("firstname")).sendKeys(contactData.getFirstname());
+        driver.findElement(By.name("middlename")).click();
+        driver.findElement(By.name("middlename")).clear();
+        driver.findElement(By.name("middlename")).sendKeys(contactData.getMiddlname());
+        driver.findElement(By.name("lastname")).click();
+        driver.findElement(By.name("lastname")).clear();
+        driver.findElement(By.name("lastname")).sendKeys(contactData.getLastname());
+        driver.findElement(By.name("nickname")).click();
+        driver.findElement(By.name("nickname")).clear();
+        driver.findElement(By.name("nickname")).sendKeys(contactData.getNickname());
+        driver.findElement(By.name("company")).click();
+        driver.findElement(By.name("company")).clear();
+        driver.findElement(By.name("company")).sendKeys(contactData.getCompany());
+        driver.findElement(By.name("home")).click();
+        driver.findElement(By.name("home")).clear();
+        driver.findElement(By.name("home")).sendKeys(contactData.getHome());
+        driver.findElement(By.name("email")).click();
+        driver.findElement(By.name("email")).clear();
+        driver.findElement(By.name("email")).sendKeys(contactData.getEmail());
+    }
+
+    protected void goToNewContactCreationPage() {
+        driver.findElement(By.linkText("ADD_NEW")).click();
+    }
+
     @AfterClass(alwaysRun = true)
     public void tearDown() throws Exception {
         driver.quit();
@@ -103,14 +135,14 @@ public class TestBase {
     }
 
     protected void returnToGroupPage() {
-      driver.findElement(By.linkText("group page")).click();
+        driver.findElement(By.linkText("group page")).click();
     }
 
     protected void deleteSelectedGroups() {
-      driver.findElement(By.name("delete")).click();
+        driver.findElement(By.name("delete")).click();
     }
 
     protected void selectGroup() {
-      driver.findElement(By.name("selected[]")).click();
+        driver.findElement(By.name("selected[]")).click();
     }
 }

@@ -8,7 +8,6 @@ public class SessionHelper {
 
     public SessionHelper(WebDriver driver) {
         this.driver = driver;
-        this.driver = driver;
     }
 
     public void login(String username, String password) {

@@ -17,27 +17,15 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='petrov@mail.ua'])[1]/following::img[2]"));
     }
 
+
     public void fillContactForm(ContactData contactData) {
-        driver.findElement(By.name("firstname")).click();
-        driver.findElement(By.name("firstname")).clear();
-        driver.findElement(By.name("firstname")).sendKeys(contactData.getFirstname());
-        driver.findElement(By.name("middlename")).click();
-        driver.findElement(By.name("middlename")).clear();
-        driver.findElement(By.name("middlename")).sendKeys(contactData.getMiddlname());
-        driver.findElement(By.name("lastname")).click();
-        driver.findElement(By.name("lastname")).clear();
-        driver.findElement(By.name("lastname")).sendKeys(contactData.getLastname());
-        driver.findElement(By.name("nickname")).click();
-        driver.findElement(By.name("nickname")).clear();
-        driver.findElement(By.name("nickname")).sendKeys(contactData.getNickname());
-        driver.findElement(By.name("company")).clear();
-        driver.findElement(By.name("company")).sendKeys(contactData.getCompany());
-        driver.findElement(By.name("home")).click();
-        driver.findElement(By.name("home")).clear();
-        driver.findElement(By.name("home")).sendKeys(contactData.getHome());
-        driver.findElement(By.name("email")).click();
-        driver.findElement(By.name("email")).clear();
-        driver.findElement(By.name("email")).sendKeys(contactData.getEmail());
+        type(By.name("firstname"), contactData.getFirstname());
+        type(By.name("middlename"), contactData.getMiddlname());
+        type(By.name("lastname"), contactData.getLastname());
+        type(By.name("nickname"), contactData.getNickname());
+        type(By.name("company"), contactData.getCompany());
+        type(By.name("home"), contactData.getHome());
+        type(By.name("email"), contactData.getEmail());
     }
 
     public void submitContactModification() {

@@ -10,7 +10,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public void selectContact() {
-        click(By.id("4"));
+        click(By.id("10"));
     }
 
     public void initContactModification() {
@@ -44,4 +44,11 @@ public class ContactHelper extends HelperBase {
         click(By.name("update"));
     }
 
+    public void deleteSelectedContact() {
+        click(By.xpath("/html/body/div[1]/div[4]/form[2]/div[2]/input"));
+    }
+
+    public void acceptAlert() {
+        driver.switchTo().alert().accept();
+    }
 }

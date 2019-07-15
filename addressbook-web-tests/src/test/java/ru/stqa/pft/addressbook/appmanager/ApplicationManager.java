@@ -46,16 +46,6 @@ public class ApplicationManager {
 
     }
 
-
-    public void submitContactCreation() {
-        driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='NOTES:'])[1]/following::input[1]")).click();
-    }
-
-
-    public void goToNewContactCreationPage() {
-        driver.findElement(By.linkText("ADD_NEW")).click();
-    }
-
     public void stop() {
         driver.quit();
         String verificationErrorString = verificationErrors.toString();

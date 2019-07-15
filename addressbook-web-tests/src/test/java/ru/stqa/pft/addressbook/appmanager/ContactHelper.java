@@ -1,9 +1,7 @@
 package ru.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
@@ -14,11 +12,11 @@ public class ContactHelper extends HelperBase {
     }
 
     public void selectContact() {
-        click(By.id("10"));
+        click(By.name("selected[]"));
     }
 
     public void initContactModification() {
-        click(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='petrov@mail.ua'])[1]/following::img[2]"));
+        click(By.cssSelector("img[alt='EDIT']"));
     }
 
     public void fillContactForm(ContactData contactData, boolean creation) {
@@ -30,12 +28,13 @@ public class ContactHelper extends HelperBase {
         type(By.name("home"), contactData.getHome());
         type(By.name("email"), contactData.getEmail());
 
-        if(creation){
+        if (creation) {
             new Select(driver.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
     }
+
     public void submitContactModification() {
         click(By.name("update"));
     }
@@ -46,5 +45,30 @@ public class ContactHelper extends HelperBase {
 
     public void acceptAlert() {
         driver.switchTo().alert().accept();
+    }
+
+    public void submitContactCreation() {
+        driver.findElement(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='NOTES:'])[1]/following::input[1]")).click();
+    }
+    public void goToNewContactCreationPage() {
+        driver.findElement(By.linkText("ADD_NEW")).click();
+    }
+
+    public void createContact(ContactData contact) {
+        goToNewContactCreationPage();
+        fillContactForm(new ContactData("Petro", "Petrovich", "Petrov", "Petya", "Volvo", "357781468", "petrov@mail.ua", "Test1"), true);
+        submitContactCreation();
+        goToHomePage();
+
+    }
+    public void goToHomePage() {
+        if (isElementPresent(By.id("maintable"))) {
+            return;
+        }
+        click(By.linkText("HOME"));
+    }
+
+    public boolean isThereAContact() {
+        return isElementPresent(By.name("selected[]"));
     }
 }

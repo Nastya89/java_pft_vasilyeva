@@ -12,10 +12,62 @@ public class ContactData {
     private String email;
     private String group;
 
-    public ContactData() {
+    public ContactData withFirstname(String firstname) {
+        this.firstname = firstname;
+        return this;
     }
 
-    public ContactData(String firstname, String middlname, String lastname, String nickname, String company, String home, String email, String group) {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ContactData that = (ContactData) o;
+        return Objects.equals(firstname, that.firstname) &&
+                Objects.equals(lastname, that.lastname);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstname, lastname);
+    }
+
+    public ContactData withMiddlname(String middlname) {
+        this.middlname = middlname;
+        return this;
+    }
+
+    public ContactData withLastname(String lastname) {
+        this.lastname = lastname;
+        return this;
+    }
+
+    public ContactData withNickname(String nickname) {
+        this.nickname = nickname;
+        return this;
+    }
+
+    public ContactData withCompany(String company) {
+        this.company = company;
+        return this;
+    }
+
+    public ContactData withHome(String home) {
+        this.home = home;
+        return this;
+    }
+
+    public ContactData withEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    public ContactData withGroup(String group) {
+        this.group = group;
+        return this;
+    }
+
+
+   /* public ContactData(String firstname, String middlname, String lastname, String nickname, String company, String home, String email, String group) {
         this.firstname = firstname;
         this.middlname = middlname;
         this.lastname = lastname;
@@ -25,10 +77,11 @@ public class ContactData {
         this.email = email;
         this.group = group;
     }
-    public ContactData(String firstname,String lastname) {
+
+    public ContactData(String firstname, String lastname) {
         this.firstname = firstname;
         this.lastname = lastname;
-    }
+    }*/
 
     public String getFirstname() {
         return firstname;
@@ -64,20 +117,6 @@ public class ContactData {
                 "firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ContactData that = (ContactData) o;
-        return Objects.equals(firstname, that.firstname) &&
-                Objects.equals(lastname, that.lastname);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(firstname, lastname);
     }
 
     public String getGroup() {

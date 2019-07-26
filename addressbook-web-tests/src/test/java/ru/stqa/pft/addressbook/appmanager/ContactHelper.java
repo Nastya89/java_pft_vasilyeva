@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.Groups;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -74,6 +75,7 @@ public class ContactHelper extends HelperBase {
         goToNewContactCreationPage();
         fillContactForm(contact, true);
         submitContactCreation();
+        contactCache=null;
         goToHomePage();
     }
 
@@ -83,6 +85,7 @@ public class ContactHelper extends HelperBase {
         fillContactForm(dataForModification
                 ,false);
         submitContactModification();
+        contactCache=null;
         goToHomePage();
     }
 
@@ -96,6 +99,7 @@ public class ContactHelper extends HelperBase {
         selectContactByName(contact);
         deleteSelectedContact();
         acceptAlert();
+        contactCache=null;
         goToHomePage();
     }
     public void goToHomePage() {
@@ -110,7 +114,7 @@ public class ContactHelper extends HelperBase {
         return isElementPresent(By.name("selected[]"));
     }
 
-    public int getContactCount() {
+    public int count() {
         return driver.findElements(By.name("selected[]")).size();
     }
 
@@ -130,9 +134,13 @@ public class ContactHelper extends HelperBase {
         }
         return contacts;
     }
+    private Contacts contactCache = null;
 
     public Contacts all() {
-        Contacts contacts = new Contacts();
+        if (contactCache != null){
+            return new Contacts(contactCache);
+        }
+        contactCache = new Contacts();
         List<WebElement> elements = driver.findElements(By.name("entry"));
 
         if (elements != null && elements.size() > 0) {
@@ -140,9 +148,9 @@ public class ContactHelper extends HelperBase {
                 String name = driver.findElement(By.xpath("*//tbody/tr[" + i + "]/td[3]")).getText();
                 String surname = driver.findElement(By.xpath("*//tbody/tr[" + i + "]/td[2]")).getText();
 
-                contacts.add(new ContactData().withFirstname(name).withLastname(surname));
+                contactCache.add(new ContactData().withFirstname(name).withLastname(surname));
             }
         }
-        return contacts;
+        return new Contacts(contactCache);
     }
 }

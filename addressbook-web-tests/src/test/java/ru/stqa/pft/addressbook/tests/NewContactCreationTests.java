@@ -18,6 +18,7 @@ public class NewContactCreationTests extends TestBase {
         app.contact().goToNewContactCreationPage();
         ContactData contact = new ContactData().withFirstname("Ivan").withLastname("Petrov");
         app.contact().create(contact);
+        assertThat(app.contact().count(), equalTo(before.size() + 1));
         Contacts after = app.contact().all();
 
         //  before.sort(Comparator.comparing(ContactData::getFirstname).thenComparing(ContactData::getLastname));
@@ -26,7 +27,7 @@ public class NewContactCreationTests extends TestBase {
         // УТОЧНИТЬ! При использовании HashSet результат теста не является валидным при сравнивании по имени и фамилии.
         //   Если добавляем не уникального пользователя, то кол-во контактов будет совпадать, что противоречит логике теста.
 
-        assertThat(after.size(), equalTo(before.size() + 1));
+
         System.out.println(before.size() + " after: " + after.size());
 
         if (before != null || before.size() != 0) {

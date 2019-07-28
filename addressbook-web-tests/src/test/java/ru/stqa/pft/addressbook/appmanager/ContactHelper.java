@@ -139,7 +139,6 @@ public class ContactHelper extends HelperBase {
 
     public List<ContactData> list() {
         List<ContactData> contacts = new ArrayList<>();
-        //Contacts contacts = new Contacts();
 
         List<WebElement> elements = driver.findElements(By.name("entry"));
 
@@ -155,24 +154,6 @@ public class ContactHelper extends HelperBase {
     }
 
     private Contacts contactCache = null;
-
-  /* public Contacts all() {
-        if (contactCache != null){
-            return new Contacts(contactCache);
-        }
-        contactCache = new Contacts();
-        List<WebElement> elements = driver.findElements(By.name("entry"));
-
-        if (elements != null && elements.size() > 0) {
-            for (int i = 2; i < elements.size() + 2; i++) {
-               String name = driver.findElement(By.xpath("* //tbody/tr[" + i + "]/td[3]")).getText();
-                String surname = driver.findElement(By.xpath("* //tbody/tr[" + i + "]/td[2]")).getText();
-
-                contactCache.add(new ContactData().withFirstname(name).withLastname(surname));
-            }
-        }
-        return new Contacts(contactCache);
-    }*/
 
     public Contacts all() {
         if (contactCache != null) {

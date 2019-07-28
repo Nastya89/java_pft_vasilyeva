@@ -6,10 +6,7 @@ import org.openqa.selenium.WebElement;
 import ru.stqa.pft.addressbook.model.GroupData;
 import ru.stqa.pft.addressbook.model.Groups;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class GroupHelper extends HelperBase {
 
@@ -95,10 +92,11 @@ public class GroupHelper extends HelperBase {
     public int count() {
         return driver.findElements(By.name("selected[]")).size();
     }
+
     private Groups groupCache = null;
 
     public Groups all() {
-        if (groupCache != null){
+        if (groupCache != null) {
             return new Groups(groupCache);
         }
         groupCache = new Groups();

@@ -8,7 +8,6 @@ import ru.stqa.pft.addressbook.model.Contacts;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.Assert.assertEquals;
 
 public class ContactModificationTests extends TestBase {
     @BeforeMethod
@@ -24,14 +23,11 @@ public class ContactModificationTests extends TestBase {
         Contacts beforeList = app.contact().all();
         ContactData foundedContact = beforeList.iterator().next();
         ContactData modifiedContact = new ContactData()
-                .withFirstname("Ivann").withLastname("ASAS1").withNickname("tester").withCompany("Toyota");
+                .withFirstname("Maria").withLastname("Lopez").withNickname("tester").withCompany("Toyota");
         app.contact().modify(foundedContact, modifiedContact);
 
         Contacts afterList = app.contact().all();
         afterList.add(modifiedContact);
-
-        // before.sort(Comparator.comparing(ContactData::getFirstname).thenComparing(ContactData::getLastname));
-        //  after.sort(Comparator.comparing(ContactData::getFirstname).thenComparing(ContactData::getLastname));
 
         if (beforeList != null || beforeList.size() != 0) {
             ContactData updatedContact = null;
@@ -50,10 +46,6 @@ public class ContactModificationTests extends TestBase {
             }
             Assert.assertNotEquals(updatedContact, null);
         }
-
-        // assertEquals(afterList.size(), beforeList.size());
-        // System.out.println(beforeList.size() + " after: " + afterList.size());
-
         assertThat(afterList, equalTo(beforeList.withOut(foundedContact).withAdded(modifiedContact)));
     }
 }

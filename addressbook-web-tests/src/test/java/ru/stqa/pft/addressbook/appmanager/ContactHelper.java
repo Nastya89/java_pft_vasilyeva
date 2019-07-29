@@ -38,6 +38,11 @@ public class ContactHelper extends HelperBase {
         click(By.xpath(String.format("*//a[contains(@href, '%s')]/img[@title = 'EDIT']", id)));
     }
 
+    public void initContactDetails(int id) {
+        click(By.xpath(String.format("*//a[contains(@href, '%s')]/img[@title = 'DETAILS']", id)));
+    }
+
+
     public void fillContactForm(ContactData contactData, boolean creation) {
         type(By.name("firstname"), contactData.getFirstname());
         type(By.name("middlename"), contactData.getMiddlname());
@@ -180,4 +185,15 @@ public class ContactHelper extends HelperBase {
         }
         return new Contacts(contactCache);
     }
+    public void contactDetailes(ContactData contact) {
+        List<WebElement> rows = driver.findElements(By.name("entry"));
+        initContactDetails(contact.getId());
+
+    }
+
+public String getAllText(){
+String result = driver.findElement(By.id("content")).getText();
+
+        return result.replace("H: ", "").replace("W: ","").replace("M: ","").replace("\n\n", "\n");
+}
 }

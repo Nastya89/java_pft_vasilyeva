@@ -62,9 +62,10 @@ public class ContactHelper extends HelperBase {
         String home = driver.findElement(By.name("home")).getAttribute("value");
         String mobile = driver.findElement(By.name("mobile")).getAttribute("value");
         String work = driver.findElement(By.name("work")).getAttribute("value");
+        String address = driver.findElement(By.name("address")).getAttribute("value");
         goToHomePage();
         return new ContactData().withId(contact.getId())
-                .withFirstname(firstname).withLastname(lastname).withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work);
+                .withFirstname(firstname).withLastname(lastname).withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work).withAddress(address);
     }
 
     private void initContactModificationById(int id) {
@@ -166,11 +167,10 @@ public class ContactHelper extends HelperBase {
             int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
             String lastname = cells.get(1).getText();
             String firstname = cells.get(2).getText();
-            String[] phones = cells.get(5).getText().split("\n");
+            String allPhones = cells.get(5).getText();
+            String address = cells.get(3).getText();
             contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname)
-                    .withHomePhone(phones.length > 0 ? phones[0] : "")
-                    .withMobilePhone(phones.length > 1 ? phones[1] : "")
-                    .withWorkPhone(phones.length > 2 ? phones[2] : ""));
+                   .withAllPhones(allPhones).withAddress(address));
         }
         return new Contacts(contactCache);
     }

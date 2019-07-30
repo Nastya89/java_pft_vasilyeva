@@ -51,6 +51,7 @@ public class ContactHelper extends HelperBase {
         type(By.name("company"), contactData.getCompany());
         type(By.name("home"), contactData.getHomePhone());
         type(By.name("email"), contactData.getAllEmails());
+        attach(By.name("photo"), contactData.getPhoto());
 
         if (creation) {
             ContactData withGroup = contactData.withGroup("Test1");
@@ -144,9 +145,11 @@ public class ContactHelper extends HelperBase {
         return isElementPresent(By.name("selected[]"));
     }
 
+
     public int count() {
         return driver.findElements(By.name("selected[]")).size();
     }
+
 
     public List<ContactData> list() {
         List<ContactData> contacts = new ArrayList<>();
@@ -180,15 +183,18 @@ public class ContactHelper extends HelperBase {
             String allPhones = cells.get(5).getText();
             String address = cells.get(3).getText();
             String allEmails = cells.get(4).getText();
+
+            ContactData test2 = new ContactData().withId(id).withFirstname(firstname).withLastname(lastname)
+                    .withAllPhones(allPhones).withAddress(address).withAllEmails(allEmails);
             contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname)
                    .withAllPhones(allPhones).withAddress(address).withAllEmails(allEmails));
         }
         return new Contacts(contactCache);
     }
+
     public void contactDetailes(ContactData contact) {
         List<WebElement> rows = driver.findElements(By.name("entry"));
         initContactDetails(contact.getId());
-
     }
 
 public String getAllText(){

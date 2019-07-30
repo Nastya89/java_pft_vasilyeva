@@ -175,18 +175,17 @@ public class ContactHelper extends HelperBase {
         }
         contactCache = new Contacts();
         List<WebElement> rows = driver.findElements(By.name("entry"));
+
         for (WebElement row : rows) {
             List<WebElement> cells = row.findElements(By.tagName("td"));
             int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
-            String lastname = cells.get(1).getText();
-            String firstname = cells.get(2).getText();
+            String lastName = cells.get(1).getText();
+            String firstName = cells.get(2).getText();
             String allPhones = cells.get(5).getText();
             String address = cells.get(3).getText();
             String allEmails = cells.get(4).getText();
 
-            ContactData test2 = new ContactData().withId(id).withFirstname(firstname).withLastname(lastname)
-                    .withAllPhones(allPhones).withAddress(address).withAllEmails(allEmails);
-            contactCache.add(new ContactData().withId(id).withFirstname(firstname).withLastname(lastname)
+            contactCache.add(new ContactData().withId(id).withFirstname(firstName).withLastname(lastName)
                    .withAllPhones(allPhones).withAddress(address).withAllEmails(allEmails));
         }
         return new Contacts(contactCache);

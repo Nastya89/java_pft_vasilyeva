@@ -1,9 +1,15 @@
 package ru.stqa.pft.addressbook.model;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
 import java.io.File;
 import java.util.Objects;
 
+@XStreamAlias("contact")
+
 public class ContactData {
+
     private String firstname;
     private String middlname;
     private String lastname;
@@ -19,6 +25,7 @@ public class ContactData {
     private String email;
     private String email2;
     private String email3;
+    @XStreamOmitField
     private int id;
     private File photo;
 
@@ -33,7 +40,7 @@ public class ContactData {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ContactData contactData = (ContactData) o;
-        return  this.id == contactData.id &&
+        return this.id == contactData.id &&
                 Objects.equals(this.firstname, contactData.firstname) &&
                 Objects.equals(this.lastname, contactData.lastname);
     }
@@ -106,39 +113,26 @@ public class ContactData {
         this.id = id;
         return this;
     }
+
     public ContactData withEmail(String email) {
         this.email = email;
         return this;
     }
+
     public ContactData withEmail2(String email2) {
         this.email2 = email2;
         return this;
     }
+
     public ContactData withEmail3(String email3) {
-        this.email3= email3;
+        this.email3 = email3;
         return this;
     }
+
     public ContactData withPhoto(File photo) {
         this.photo = photo;
         return this;
     }
-
-   /* public ContactData(String firstname, String middlname, String lastname, String nickname, String company, String home, String email, String group) {
-        this.firstname = firstname;
-        this.middlname = middlname;
-        this.lastname = lastname;
-        this.nickname = nickname;
-        this.company = company;
-        this.home = home;
-        this.email = email;
-        this.group = group;
-    }
-
-    public ContactData(String firstname, String lastname) {
-        this.firstname = firstname;
-        this.lastname = lastname;
-    }*/
-
     public String getFirstname() {
         return firstname;
     }
@@ -163,25 +157,42 @@ public class ContactData {
         return home;
     }
 
-    public String getAllEmails() { return allEmails; }
+    public String getAllEmails() {
+        return allEmails;
+    }
 
-    public int getId() { return id; }
+    public int getId() {
+        return id;
+    }
 
     public String getMobilePhone() {
         return mobile;
     }
 
-    public String getWorkPhone() { return work; }
+    public String getWorkPhone() {
+        return work;
+    }
 
-    public String getAddress() { return address; }
+    public String getAddress() {
+        return address;
+    }
 
-    public String getEmail() { return email; }
+    public String getEmail() {
+        return email;
+    }
 
-    public String getEmail2() { return email2; }
+    public String getEmail2() {
+        return email2;
+    }
 
-    public String getEmai3() { return email3; }
+    public String getEmai3() {
+        return email3;
+    }
 
-    public File getPhoto() { return photo; }
+    public File getPhoto() {
+        return photo;
+    }
+
     @Override
     public String toString() {
         return "ContactData{" +
